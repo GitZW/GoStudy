@@ -22,10 +22,12 @@ func Same(t1, t2 *tree.Tree) bool {
 	ch2 := make(chan int)
 	go Walk(t1, ch1)
 	go Walk(t2, ch2)
-	if <-ch1 == <-ch2 {
-		return true
-	} else {
-		return false
+	for {
+		if <-ch1 != <-ch2 {
+			return false
+		}
+		//todo
+
 	}
 
 }
@@ -34,9 +36,9 @@ func main() {
 	t1 := tree.New(1)
 	t2 := tree.New(2)
 
-	if Same(t1, t2) {
-		println("same")
-	}
+	//if Same(t1, t2) {
+	//	println("same")
+	//}
 	if !Same(t1, t2) {
 		println("not same")
 	}
