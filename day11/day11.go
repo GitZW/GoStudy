@@ -18,27 +18,26 @@ func Walk(t *tree.Tree, ch chan int) {
 
 // Same 判断 t1 和 t2 是否包含相同的值。
 func Same(t1, t2 *tree.Tree) bool {
-	ch1 := make(chan int)
-	ch2 := make(chan int)
+	ch1 := make(chan int, 10)
+	ch2 := make(chan int, 10)
 	go Walk(t1, ch1)
 	go Walk(t2, ch2)
-	for {
+
+	for i := 0; i < 10; i++ {
 		if <-ch1 != <-ch2 {
 			return false
 		}
-		//todo
-
 	}
-
+	return true
 }
 
 func main() {
 	t1 := tree.New(1)
-	t2 := tree.New(2)
+	t2 := tree.New(1)
 
-	//if Same(t1, t2) {
-	//	println("same")
-	//}
+	if Same(t1, t2) {
+		println("same")
+	}
 	if !Same(t1, t2) {
 		println("not same")
 	}
