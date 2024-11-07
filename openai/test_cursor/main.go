@@ -80,7 +80,7 @@ func main() {
 		}
 
 		// Get messages (including assistant's response)
-		messages, err := client.ListMessages(context.Background(), thread.ID, nil)
+		messages, err := client.ListMessage(context.Background(), thread.ID, nil, nil, nil, nil, nil)
 		if err != nil {
 			fmt.Printf("Error listing messages: %v\n", err)
 			continue
